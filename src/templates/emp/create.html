@@ -1,0 +1,12 @@
+<!-- {% include 'search.html' %} -->
+<title>Create Employ</title>
+{% if messages %}
+    {% for i in messages %}
+        {{ i }}
+    {% endfor %}
+{% endif %}
+<h1>Create Employ</h1>
+<form method="post"> {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+</form>

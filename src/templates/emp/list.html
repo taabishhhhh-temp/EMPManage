@@ -1,0 +1,7 @@
+{% include 'search.html' %}
+<title>Employs List</title>
+<h1>Employs List</h1>
+<ul>
+    {% for i in object_list %}
+    <li> {{ forloop.counter }} : <a href="i.get_absolute_url"> {{ i.empid }} </a> </li>
+</ul>
