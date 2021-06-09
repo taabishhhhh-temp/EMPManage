@@ -1,6 +1,6 @@
 
-<title>Employ Details</title>
-<h1>Employ Details</h1>
+<title>Delete Employ</title>
+<h1>Delete Employ</h1>
 <ul>
     <li>EMP id: {{ object.empid }}</li>
     <li>Name: {{ object.fname }} {{ object.lname }}</li>
@@ -8,3 +8,7 @@
     <li>Mobile: {{ object.mobile }}</li>
     <li>Position: {{ object.position }}</li>
 </ul>
+<form action="." method="post"> {% csrf_token %}
+    <input type="submit" value="Delete">
+    <a href="/emp/list/">Cancel</a>
+</form>
