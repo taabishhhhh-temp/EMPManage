@@ -1,7 +1,16 @@
 {% include 'search.html' %}
+{% include 'home.html' %}
 <title>Employs List</title>
+{% if messages %}
+    {% for i in messages %}
+        {{ i }}
+    {% endfor %}
+{% endif %}
 <h1>Employs List</h1>
 <ul>
     {% for i in object_list %}
-    <li> {{ i.id }} : <a href=" {{ i.get_absolute_url }} "> {{ i.empid }} </a> </li>      {% endfor %}
+    <li> System id: {{ i.id }}   and   empid: <a href=" {{ i.get_absolute_url }} "> {{ i.empid }} </a> 
+    </li>      
+    {% endfor %}
 </ul>
+<p>NOTE: Use System id to access Details</p>

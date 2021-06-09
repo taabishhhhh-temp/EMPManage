@@ -1,4 +1,4 @@
-from django.db.models.query import QuerySet
+# from django.db.models.query import QuerySet, Q
 from django.http.response import HttpResponseBase, HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
 # from django.urls.base import reverse_lazy
@@ -27,7 +27,7 @@ def employcreate(request, *args, **kwargs):
     if form.is_valid():
         new_emp = form.save()
         messages.success(request, 'Employ Created Successfully...')
-        return redirect(new_emp.get_absolute_url())
+        return HttpResponseRedirect('/emp/create/')
     context = {
         'form' : form
     }
@@ -36,6 +36,9 @@ def employcreate(request, *args, **kwargs):
 
 def employlist(request, *args, **kwargs):
     queryset = Employ.objects.all()
+    query = request.GET.get('q', None)
+    if query is not None:
+        queryset = queryset.filter(empid__icontains=query)          
     context = {
         'object_list' : queryset
     }

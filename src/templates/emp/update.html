@@ -1,12 +1,15 @@
 <!-- {% include 'search.html' %} -->
+{% include 'home.html' %}
 <title>Update Employ Detail</title>
 {% if messages %}
     {% for i in messages %}
         {{ i }}
     {% endfor %}
 {% endif %}
-<h1>Update Detail of {{ object.empid }} </h1>
+<h1>Update Detail of {{ object.empid }}</h1>
+<p>System id for {{ object.empid }} is {{ object.id}} </p>
 <form method="post" action="."> {% csrf_token %}
     {{ form.as_p }}
+    <p>Save Changes??</p>
     <input type="submit" value="Save">
 </form>
