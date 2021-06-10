@@ -5,7 +5,9 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .forms import EmployForm
 from django.contrib import messages
 from .models import Employ
-from django.urls import reverse
+# from django.urls import reverse
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
 # from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 
@@ -21,13 +23,34 @@ from django.urls import reverse
 #     template_name = 'emp/list.html'
 #     queryset = Employ.objects.all()
 
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # username = form.cleaned_data('username')
+            # password = form.cleaned_data('password1')
+            # user = authenticate(username=username, password=password)
+            # login(request, user)
+            return HttpResponseRedirect('/accounts/login/')
+
+    else: 
+        form = UserCreationForm()
+    context = {
+        'form' : form
+    }
+    return render(request, 'registration/register.html', context)
+
+
+def homePage(request):
+    return render(request, 'home.html', {})
 
 def employcreate(request, *args, **kwargs):
     form = EmployForm(request.POST or None)
     if form.is_valid():
         new_emp = form.save()
         messages.success(request, 'Employ Created Successfully...')
-        return HttpResponseRedirect('/emp/create/')
+        return HttpResponseRedirect('/emp/list/')
     context = {
         'form' : form
     }
@@ -46,6 +69,7 @@ def employlist(request, *args, **kwargs):
 
 
 def employview(request, id, *args, **kwargs):
+    # id = int(request.GET.get('sid'))
     obj = get_object_or_404(Employ, id=id)
     context = {
         'object' : obj
@@ -65,7 +89,7 @@ def employupdate(request, id):
         form.save()
         messages.success(request, 'Employ Details Updated Successfully...')
         # return HttpResponseRedirect('https://www.google.co.in/')
-        return HttpResponseRedirect('/emp/view/{id}/'.format(id=obj.id))
+        return HttpResponseRedirect('/emp/list/')
         # return reverse('emp:view', kwargs={'object' : obj })
     return render(request, 'emp/update.html', context)
 

@@ -1,7 +1,8 @@
-{% include 'home.html' %}
+{% include 'navbar.html' %}
+{% include 'search.html' %}
 <title>Delete Employ</title>
 <h1>Delete Employ</h1>
-<p>System id for {{ object.empid }} is {{ object.id}} </p>
+<!-- <p>System id for {{ object.empid }} is {{ object.id}} </p> -->
 <ul>
     <li>EMP id: {{ object.empid }}</li>
     <li>Name: {{ object.fname }} {{ object.lname }}</li>
@@ -11,6 +12,6 @@
 </ul>
 <form action="." method="post"> {% csrf_token %}
     <p>Are you Sure??</p>
-    <input type="submit" value="Yes">
-    <a href="/emp/list/">Cancel</a>
+    <input type="submit" value="YES">
+    <button><a href="/emp/list/">NO</a></button>
 </form>

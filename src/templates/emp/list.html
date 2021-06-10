@@ -1,5 +1,6 @@
+{% include 'navbar.html' %}
 {% include 'search.html' %}
-{% include 'home.html' %}
+<!-- {% include 'home.html' %} -->
 <title>Employs List</title>
 {% if messages %}
     {% for i in messages %}
@@ -7,10 +8,10 @@
     {% endfor %}
 {% endif %}
 <h1>Employs List</h1>
+<form action="" name="sid" method="get"></form>
 <ul>
     {% for i in object_list %}
-    <li> System id: {{ i.id }}   and   empid: <a href=" {{ i.get_absolute_url }} "> {{ i.empid }} </a> 
+    <li>EMPID: {{ i.empid }} <button><a href=" {{ i.get_absolute_url }} ">VIEW</a></button> <button><a href="{{ i.get_update_url }}">UPDATE</a></button> <button><a href="{{ i.get_delete_url }}">DELETE</a></button>
     </li>      
     {% endfor %}
 </ul>
-<p>NOTE: Use System id to access Details</p>

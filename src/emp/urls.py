@@ -1,11 +1,12 @@
 from os import name
 from django.urls import path
-from .views import employcreate, employview, employlist, employupdate, employdelete
+from .views import employcreate, employview, employlist, employupdate, employdelete, register
 # from .views import CreateEmploy, ListEmploy 
 
 app_name = 'emp'
 
 urlpatterns = [
+    
     path('create/', employcreate, name='create_emp'),
     path('view/<int:id>/', employview, name='view_emp'),
     path('list/', employlist, name='list_emp'),

@@ -1,0 +1,43 @@
+<nav class = "navlinks">
+    <ul type = "none">
+    <li>
+        <button><a href="/">HOME</a></button>
+    </li>
+    {% if not user.is_authenticated %}
+    <li><button><a href="/accounts/login/">LOGIN</a></button></li>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <li>
+        <button><a href="/emp/create/">CREATE RECORD</a></button>
+    </li>
+    <li>
+        <button><a href="/emp/list/">RECORDS LIST</a></button>
+    </li>    
+    <li><button><a href="/accounts/logout/">LOGOUT</a></button></li>
+    {% endif %}
+</ul>
+    {% if user.is_authenticated %}
+        <p>Logged in as {{ user.username }} </p>
+    {% endif %}
+</nav>
+<style>
+  .navlinks{
+      display: flex;
+      justify-content: space-between;
+      padding: 1.2rem;;
+  } 
+  .navlinks ul{
+        display: flex;
+  } 
+  li{
+      padding: 0.6rem;;
+  }
+  button{
+      background-color: none;
+  }
+  button a{
+      text-decoration: none;
+      color:black;  
+  }
+</style>
