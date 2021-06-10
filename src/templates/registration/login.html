@@ -1,4 +1,4 @@
-
+{% include 'navbar.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +8,29 @@
     <title>Login</title>
 </head>
 <body>
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
 
         <p>Username: {{ form.username }}</p>
         <p>Password: {{ form.password }}</p>
 
-        <input type="submit" value="login">
+        <input type="submit" value="LOGIN">
         <button><a href="/register/">REGISTER</a></button>
     </form>
 </body>
 </html>
+
+<style>
+button{
+      background-color: none;
+  }
+button a{
+      text-decoration: none;
+      color:black;  
+  }
+</style>

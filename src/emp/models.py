@@ -2,21 +2,22 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.fields import EmailField
 from django.urls import reverse
-from django.core.validators import MaxValueValidator, MinValueValidator
+# from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 
 
-def validate_empid(value):
-    if value > 9999:
-        return ValidationError('Empid cannot be greater than 9999!')
-
+# def clean_empid(empid):
+#     if empid < 100 and empid > 999:
+#         return forms.ValidationError('Empid cannot be greater than 9999!')
+#     else:
+#         return empid
 
 class Employ(models.Model):
-    empid = models.IntegerField(validators=[validate_empid, ])
+    empid = models.IntegerField()
     fname = models.CharField(max_length=20)
     lname = models.CharField(max_length=20)
     email = models.EmailField()
-    mobile = models.CharField(max_length=10)
+    mobile = models.IntegerField()
     position = models.CharField(max_length=20)
 
     def get_delete_url(self):

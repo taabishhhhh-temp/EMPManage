@@ -32,6 +32,7 @@ def register(request):
             # password = form.cleaned_data('password1')
             # user = authenticate(username=username, password=password)
             # login(request, user)
+            messages.success(request, 'Account Created Successfully...')
             return HttpResponseRedirect('/accounts/login/')
 
     else: 
@@ -69,7 +70,6 @@ def employlist(request, *args, **kwargs):
 
 
 def employview(request, id, *args, **kwargs):
-    # id = int(request.GET.get('sid'))
     obj = get_object_or_404(Employ, id=id)
     context = {
         'object' : obj
@@ -78,7 +78,6 @@ def employview(request, id, *args, **kwargs):
 
 
 def employupdate(request, id):
-    # id_ = Employ.objects.get()
     obj = get_object_or_404(Employ, id=id)
     form = EmployForm(request.POST or None, instance=obj)
     context = {

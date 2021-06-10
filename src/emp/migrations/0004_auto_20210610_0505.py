@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='employ',
             name='empid',
-            field=models.IntegerField(validators=[emp.models.validate_empid]),
+            field=models.IntegerField(),
         ),
     ]
