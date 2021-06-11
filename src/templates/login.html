@@ -13,13 +13,14 @@
             <p>{{ message }}</p>
         {% endfor %}
     {% endif %}
-    <form action="{% url 'login' %}" method="post"> {% csrf_token %}
-        
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+
         <p>Username: {{ form.username }}</p>
         <p>Password: {{ form.password }}</p>
 
         <input type="submit" value="LOGIN">
-        <button><a href="/register/">REGISTER</a></button>
+        <!-- <button><a href="/register/">REGISTER</a></button> -->
     </form>
 </body>
 </html>

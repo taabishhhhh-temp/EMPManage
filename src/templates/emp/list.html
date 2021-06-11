@@ -8,7 +8,7 @@
     {% endfor %}
 {% endif %}
 <h1>Employs List</h1>
-<form action="" name="sid" method="get"></form>
+<!-- <form method="get"></form> -->
 <ul>
     {% for i in object_list %}
     <li>EMPID: {{ i.empid }} <button><a href=" {{ i.get_absolute_url }} ">VIEW</a></button> <button><a href="{{ i.get_update_url }}">UPDATE</a></button> <button><a href="{{ i.get_delete_url }}">DELETE</a></button>

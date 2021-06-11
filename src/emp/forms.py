@@ -2,7 +2,7 @@ from django import forms
 from django.db.models import fields
 from .models import Employ
 
-class EmployForm(forms.ModelForm):
+class EmployForm(forms.ModelForm):   #Model Form
     class Meta:
         model = Employ
         fields = [
@@ -14,7 +14,7 @@ class EmployForm(forms.ModelForm):
             'position'
         ]
 
-    def clean_fname(self):
+    def clean_fname(self):  #Validator
         value = self.cleaned_data.get('fname')
         return value.title()
 

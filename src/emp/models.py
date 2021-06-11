@@ -4,7 +4,7 @@ from django.db.models.fields import EmailField
 from django.urls import reverse
 # from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
-
+from django.db.models.signals import pre_save, post_save
 
 # def clean_empid(empid):
 #     if empid < 100 and empid > 999:
@@ -12,8 +12,16 @@ from django.core.exceptions import ValidationError
 #     else:
 #         return empid
 
+# def empid_creater(sender, instance, *args, **kwargs):
+#     count = Employ.objects.count()
+#     empid = count+1
+#     return empid
+
+# pre_save.connect(empid_creater, sender=Employ)
+
+
 class Employ(models.Model):
-    empid = models.IntegerField()
+    empid = models.AutoField(primary_key=True)
     fname = models.CharField(max_length=20)
     lname = models.CharField(max_length=20)
     email = models.EmailField()
@@ -21,13 +29,13 @@ class Employ(models.Model):
     position = models.CharField(max_length=20)
 
     def get_delete_url(self):
-        return reverse('emp:delete_emp', kwargs = {'id' : self.id})
+        return reverse('emp:delete_emp', kwargs = {'empid' : self.empid})
 
     def get_update_url(self):
-        return reverse('emp:update_emp', kwargs = {'id' : self.id})
+        return reverse('emp:update_emp', kwargs = {'empid' : self.empid})
 
     def get_absolute_url(self):
-        return reverse('emp:view_emp', kwargs = {'id' : self.id})
+        return reverse('emp:view_emp', kwargs = {'empid' : self.empid})
 
 
 
@@ -41,3 +49,4 @@ class Employ(models.Model):
     class Meta: 
         verbose_name = 'Employee'
         verbose_name_plural = 'Employees'
+
