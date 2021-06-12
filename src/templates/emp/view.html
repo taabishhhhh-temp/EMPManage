@@ -4,9 +4,17 @@
 <h1>Employ Details</h1>
 <!-- <p>System id for {{ object.empid }} is {{ object.id}} </p> -->
 <ul>
-    <li>EMP id: {{ object.empid }}</li>
-    <li>Name: {{ object.fname }} {{ object.lname }}</li>
-    <li>Email: {{ object.email }}</li>
+    <li>Employ ID: {{ object.employID }}</li>
+    <li>Name: {{ object.get_full_name }}</li>
+    <li>Personal Email: {{ object.personalEmail }}</li>
+    <li>Fladdra Email: {{ object.fladdraEmail }}</li>
     <li>Mobile: {{ object.mobile }}</li>
     <li>Position: {{ object.position }}</li>
+    <li>Github: {{ object.github }}</li>
+    <li>Education: {{ object.education }} </li>
+    <li>Address: {{ object.address }} </li>
 </ul>
+<br>
+<button><a href="{{ object.get_update_url }}">UPDATE</a></button>
+<button><a href="{{  object.get_delete_url }}">DELETE</a></button>
+<button><a href="/emp/list/">Back to List</a></button>

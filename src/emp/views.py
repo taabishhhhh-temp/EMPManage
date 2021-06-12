@@ -50,27 +50,28 @@ from django.contrib.auth.decorators import login_required
 #     return render(request, 'registration/register.html', context)
 
 
+
 def homePage(request):
     return render(request, 'home.html', {})
 
 @login_required
 def employcreate(request, *args, **kwargs):
-    fname = request.POST.get('fname')
-    lname = request.POST.get('lname')
-    email = request.POST.get('email')
-    mobile = request.POST.get('mobile')
-    position = request.POST.get('position')
+    # fname = request.POST.get('fname')
+    # lname = request.POST.get('lname')
+    # email = request.POST.get('email')
+    # mobile = request.POST.get('mobile')
+    # position = request.POST.get('position')
     # print(lname,fname,email,mobile,position)
-    Employ.objects.create(fname=fname, lname=lname, email=email, mobile=mobile, position=position)
-    # form = EmployForm(request.POST or None)
-    # if form.is_valid():
-    #     new_emp = form.save()
-    #     messages.success(request, 'Employ Created Successfully...')
-    #     return HttpResponseRedirect('/emp/list/')
-    # context = {
-    #     'form' : form
-    # }
-    return render(request, 'emp/create.html', {})
+    # Employ.objects.create(fname=fname, lname=lname, email=email, mobile=mobile, position=position)
+    form = EmployForm(request.POST or None)
+    if form.is_valid():
+        new_emp = form.save()
+        messages.success(request, 'Employ Created Successfully...')
+        return HttpResponseRedirect('/emp/list/')
+    context = {
+        'form' : form
+    }
+    return render(request, 'emp/create.html', context)
 
 
 # @login_required(login_url='/login/')
@@ -81,6 +82,7 @@ def employlist(request, *args, **kwargs):
     if query is not None:
         queryset = queryset.filter(
                                 Q(empid__icontains=query) |
+                                Q(EmployID__icontains=query) |
                                 Q(fname__icontains=query) |
                                 Q(lname__icontains=query) |
                                 Q(email__icontains=query) |
@@ -88,7 +90,8 @@ def employlist(request, *args, **kwargs):
                                 Q(position__icontains=query)                                     
                                     )
     context = {
-        'object_list' : queryset
+        'object_list' : queryset,
+        'length' : len(queryset)
     }
     return render(request, 'emp/list.html', context)
 
@@ -114,7 +117,7 @@ def employupdate(request, empid):
         form.save()
         messages.success(request, 'Employ Details Updated Successfully...')
         # return HttpResponseRedirect('https://www.google.co.in/')
-        return HttpResponseRedirect('/emp/list/')
+        # return HttpResponseRedirect('/emp/list/')
         # return reverse('emp:view', kwargs={'object' : obj })
     return render(request, 'emp/update.html', context)
 

@@ -10,9 +10,10 @@
 {% endif %}
 <h1>Update Detail of {{ object.empid }}</h1>
 <!-- <p>System id for {{ object.empid }} is {{ object.id}} </p> -->
-<form method="post" action="."> {% csrf_token %}
+<form method="post" action="/emp/list/"> {% csrf_token %}
     {{ form.as_p }}
     <p>Save Changes??</p>
-    <input type="submit" value="SAVE">
-    <button><a href="/emp/list/">CANCEL</a></button>
+    <!-- <input type="submit" value="SAVE"> -->
+    <a href="/emp/list/"><input type="submit" value="SAVE CHANGES"></a>
+    <button><a href="/emp/list/">Back to List</a></button>
 </form>

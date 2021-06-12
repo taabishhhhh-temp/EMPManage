@@ -7,9 +7,12 @@
     {% endfor %}
 {% endif %}
 <h1>Create Employ</h1>
-<form method="POST" action=""> {% csrf_token %}
-    <!-- {{ form.as_p }} -->
-    First name: <input type="text" name="fname">
+<form method="POST" action="."> {% csrf_token %}
+  
+    {{ form.as_p }}
+  
+  
+    <!-- First name: <input type="text" name="fname">
     <br>
     Last name: <input type="text" name="lname">
     <br>
@@ -17,8 +20,8 @@
     <br>
     Mobile: <input type="number" name="mobile">
     <br>
-    <!-- <label for="position">Choose Position:</label> -->
-    Position: <select id="position" name="position">
+    <label for="position">Choose Position:</label> -->
+    <!-- Position: <select id="position" name="position">
     <option value="intern">Intern</option>
     <option value="Senior Developers">Senior Developers</option>
     <option value="Junior Developers">Junior Developers</option>
@@ -26,6 +29,8 @@
     <option value="test">Test</option>
     <option value="-">-</option>
     </select>
-    <br>
+    <br> -->
     <input type="submit" value="Save">
+    <button><a href="/emp/list/">Back to List</a></button>
+
 </form>
