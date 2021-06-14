@@ -3,6 +3,9 @@ from django.core.exceptions import ValidationError
 from django.db.models import fields
 from .models import Employ
 
+# class EmpForm(forms.Form):
+    
+
 class EmployForm(forms.ModelForm):   #Model Form
     class Meta:
         model = Employ
@@ -17,11 +20,12 @@ class EmployForm(forms.ModelForm):   #Model Form
             'position',
             'github',
             'education',
-            'address'
+            'address',
+            'joinedOn'
         ]
 
     
-    def employID(self):
+    def clean_employID(self):
         value = self.cleaned_data.get('employID')
         x = str(value)
         if len(x) == 4:
@@ -49,7 +53,7 @@ class EmployForm(forms.ModelForm):   #Model Form
         if len(str(value)) != 10:
             raise forms.ValidationError('Mobile number must be 10 digit!')
         else:
-            return str('+91') + str(value)
+            return value
 
     # def clean_EMPID(self):
     #     value = self.cleaned_data.get('empid')

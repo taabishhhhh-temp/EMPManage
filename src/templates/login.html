@@ -13,7 +13,7 @@
             <p>{{ message }}</p>
         {% endfor %}
     {% endif %}
-    <form action="{% url 'login' %}" method="post">
+    <form action="" method="post">   <!-- {% url 'login' %} -->
         {% csrf_token %}
 
         <p>Username: {{ form.username }}</p>

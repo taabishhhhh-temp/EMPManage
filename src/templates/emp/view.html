@@ -4,7 +4,7 @@
 <h1>Employ Details</h1>
 <!-- <p>System id for {{ object.empid }} is {{ object.id}} </p> -->
 <ul>
-    <li>Employ ID: {{ object.employID }}</li>
+    <li>Employ ID: {{ object.employID }} </li>
     <li>Name: {{ object.get_full_name }}</li>
     <li>Personal Email: {{ object.personalEmail }}</li>
     <li>Fladdra Email: {{ object.fladdraEmail }}</li>
@@ -13,6 +13,7 @@
     <li>Github: {{ object.github }}</li>
     <li>Education: {{ object.education }} </li>
     <li>Address: {{ object.address }} </li>
+    <li>Joined On: {{ object.joinedOn }} </li>
 </ul>
 <br>
 <button><a href="{{ object.get_update_url }}">UPDATE</a></button>
