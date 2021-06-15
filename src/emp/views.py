@@ -3,17 +3,17 @@ from django.http.response import HttpResponseBase, HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
 # from django.urls.base import reverse_lazy
 from .forms import EmployForm
-from django.contrib import messages
+# from django.contrib import messages
 from .models import Employ
 # from django.urls import reverse
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
+# from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth import logout
+@login_required(login_url='login/')
 def logout(request):
     logout(request)
     return HttpResponseRedirect('home/')
@@ -21,6 +21,80 @@ def logout(request):
 
 def homePage(request):
     return render(request, 'home.html', {})
+
+
+class CreateEmp(LoginRequiredMixin, CreateView):
+    form_class = EmployForm
+    template_name = 'emp/create.html'
+    queryset = Employ.objects.all()
+    #after success it will go to the get_absolute_url
+    #success_url can also be provided
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class ListEmp(LoginRequiredMixin, ListView):
+    template_name = 'emp/list.html'
+    # queryset = Employ.objects.all()
+    model = Employ
+
+    def get_queryset(self):
+        queryset = self.model.objects.all()
+        query = self.request.GET.get('q', None)
+        # query = str(query.title())
+        if query is not None:
+            queryset = self.model.objects.filter(
+                                    Q(empid__icontains=query) |
+                                    Q(employID__icontains=query) |
+                                    Q(fname__icontains=query) |
+                                    Q(lname__icontains=query) |
+                                    Q(personalEmail__icontains=query) |
+                                    Q(fladdraEmail__icontains=query) |
+                                    Q(mobile__icontains=query) |
+                                    Q(position__icontains=query) |
+                                    Q(github__icontains=query) |
+                                    Q(education__icontains=query) |
+                                    Q(address__icontains=query)                                
+                                        )
+        return queryset
+
+
+
+class ViewEmp(LoginRequiredMixin, DetailView):
+    template_name = 'emp/view.html'
+    queryset = Employ.objects.all()
+
+    def get_object(self):
+        id_ = self.kwargs.get('empid')
+        return get_object_or_404(Employ, empid=id_)
+
+
+class UpdateEmp(LoginRequiredMixin, UpdateView):
+    form_class = EmployForm
+    template_name = 'emp/update.html'
+    queryset = Employ.objects.all()
+    #after success it will go to the get_absolute_url
+    #success_url can also be provided
+
+    def get_object(self):
+        id_ = self.kwargs.get('empid')
+        return get_object_or_404(Employ, empid=id_)
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+class DeleteEmp(LoginRequiredMixin, DeleteView):
+    template_name = 'emp/delete.html'
+    queryset = Employ.objects.all()
+    success_url = '/emp/list'
+    #here success_url is required because it cant use to the get_absolute_url since the object is deleted
+
+    def get_object(self):
+        id_ = self.kwargs.get('empid')
+        return get_object_or_404(Employ, empid=id_)
+
 
 # # def register(request):
 # #     if request.method == 'POST':
@@ -132,54 +206,3 @@ def homePage(request):
 #         messages.success(request, 'Employ Details Deleted...')
 #         return HttpResponseRedirect('/emp/list/')
 #     return render(request, 'emp/delete.html', context)
-
-
-
-class CreateEmp(CreateView):
-    form_class = EmployForm
-    template_name = 'emp/create.html'
-    queryset = Employ.objects.all()
-    #after success it will go to the get_absolute_url
-    #success_url can also be provided
-
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-
-class ListEmp(ListView):
-    template_name = 'emp/list.html'
-    queryset = Employ.objects.all()
-
-
-class ViewEmp(DetailView):
-    template_name = 'emp/view.html'
-    queryset = Employ.objects.all()
-
-    def get_object(self):
-        id_ = self.kwargs.get('empid')
-        return get_object_or_404(Employ, empid=id_)
-
-
-class UpdateEmp(UpdateView):
-    form_class = EmployForm
-    template_name = 'emp/update.html'
-    queryset = Employ.objects.all()
-
-    def get_object(self):
-        id_ = self.kwargs.get('empid')
-        return get_object_or_404(Employ, empid=id_)
-
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-
-        
-class DeleteEmp(DeleteView):
-    template_name = 'emp/delete.html'
-    queryset = Employ.objects.all()
-    success_url = '/emp/list'
-    #here success_url is required because it cant use to the get_absolute_url since the object is deleted
-
-    def get_object(self):
-        id_ = self.kwargs.get('empid')
-        return get_object_or_404(Employ, empid=id_)

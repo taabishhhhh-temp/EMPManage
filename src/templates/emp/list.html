@@ -15,15 +15,15 @@
 
 <ul>
     {% for i in object_list %}
-    <li>EMPID: {{ i.employID }} <button><a href=" {{ i.get_view_url }} ">VIEW</a></button> <button><a href="{{ i.get_update_url }}">UPDATE</a></button> <button><a href="{{ i.get_delete_url }}">DELETE</a></button> <button><a href=" {{ i.get_github_url }} " target="_blank">GITHUB</a></button>
+    <li>{{ i.employID }}  {{ i.get_full_name }} <button><a href=" {{ i.get_view_url }} ">VIEW</a></button> <button><a href="{{ i.get_update_url }}">UPDATE</a></button> <button><a href="{{ i.get_delete_url }}">DELETE</a></button> <button><a href=" {{ i.get_github_url }} " target="_blank">GITHUB</a></button>
     </li>      
     {% endfor %}
 </ul>
 
 {% else %}
 
-    <p>No Records Currently...</p>
-    <p>Use Create Record to add new Records</p>
+    <p>No Records</p>
+    {% comment %} <p>Use Create Record to add new Records</p> {% endcomment %}
 
 {% endif %}
 

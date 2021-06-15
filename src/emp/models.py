@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 # from django.core.validators import MaxValueValidator, MinValueValidator
 # from django.core.exceptions import ValidationError
 from django.db.models.signals import pre_save, post_save
-from datetime import date
+from datetime import date, datetime
 
 # def clean_empid(empid):
 #     if empid < 100 and empid > 999:
@@ -55,8 +55,9 @@ class Employ(models.Model):
     github = models.CharField('Github', max_length=50)
     education = models.CharField('Highest Education', max_length=80)
     address = models.TextField('Address')
-    joinedOn = models.DateField('Joined On')
+    joinedOn = models.DateField('Joined On', default=date.today)
     # resume = models.FileField('Upload Resume', upload_to='')
+
 
 
     def get_absolute_url(self):
