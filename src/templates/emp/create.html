@@ -1,4 +1,5 @@
 {% include 'navbar.html' %}
+{% load crispy_forms_tags %}
 <!-- {% include 'search.html' %} -->
 <title>Create Employ</title>
 {% if messages %}
@@ -9,7 +10,7 @@
 <h1>Create Employ</h1>
 <form method="POST" action=""> {% csrf_token %}
   
-    {{ form.as_p }}
+    {{ form|crispy }}
   
   
     <!-- First name: <input type="text" name="fname">
@@ -30,7 +31,7 @@
     <option value="-">-</option>
     </select>
     <br> -->
-    <input type="submit" value="Save">
-    <button><a href="/emp/list/">Back to List</a></button>
+    <input class="btn btn-primary" type="submit" value="Save">
+    <button class="btn btn-primary" ><a href="/emp/list/">Back to List</a></button>
 
 </form>

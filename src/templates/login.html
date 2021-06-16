@@ -1,4 +1,5 @@
 {% include 'navbar.html' %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,10 +17,9 @@
     <form action="" method="post">   <!-- {% url 'login' %} -->
         {% csrf_token %}
 
-        <p>Username: {{ form.username }}</p>
-        <p>Password: {{ form.password }}</p>
+       {{ form|crispy }}
 
-        <input type="submit" value="LOGIN">
+        <input class="btn btn-primary" type="submit" value="LOGIN">
         <!-- <button><a href="/register/">REGISTER</a></button> -->
     </form>
 </body>

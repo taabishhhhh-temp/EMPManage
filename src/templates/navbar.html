@@ -5,20 +5,20 @@
 <nav class = "navlinks">
     <ul type = "none">
     <li>
-        <button><a href="/">HOME</a></button>
+        <button class="btn btn-primary"><a href="/">HOME</a></button>
     </li>
     {% if not user.is_authenticated %}
-    <li><button><a href="/login/">LOGIN</a></button></li>
+    <li><button class="btn btn-primary"><a href="/login/">LOGIN</a></button></li>
     {% endif %}
 
     {% if user.is_authenticated %}
     <li>
-        <button><a href="/emp/create/">CREATE RECORD</a></button>
+        <button class="btn btn-primary"><a href="/emp/create/">CREATE RECORD</a></button>
     </li>
     <li>
-        <button><a href="/emp/list/">RECORD LIST</a></button>
+        <button class="btn btn-primary"><a href="/emp/list/">RECORD LIST</a></button>
     </li>    
-    <li><button><a href="/logout/">LOGOUT</a></button></li>
+    <li><button class="btn btn-primary"><a href="/logout/">LOGOUT</a></button></li>
     {% endif %}
 </ul>
     {% if user.is_authenticated %}
