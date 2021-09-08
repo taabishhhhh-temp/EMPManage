@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Home Page{% endblock %} 
+{% block body %} 
+
+{% if not user.is_authenticated %}
+<h1 class="h1 text-center mt-5">Home Page Not Authenticated</h1>
+{% elif user.is_admin %}
+<h1 class="h1 text-center mt-5">Home Page Admin</h1>
+{% elif user.is_staff %}
+<h1 class="h1 text-center mt-5">Home Page Staff</h1>
+{% else %}
+<h1 class="h1 text-center mt-5">Home Page Other</h1>
+{% endif %}
+<div class="container">
+  <p class="text-center text-secondary mt-5">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga alias nam
+      sunt non consequatur aperiam nesciunt quis, ut magni rerum, voluptate quidem
+      vitae doloremque perspiciatis rem assumenda, vero repudiandae ipsam mollitia
+      eaque ab dolores. Porro magni, similique quibusdam nam nesciunt ex deleniti
+      amet quidem soluta corrupti molestiae, voluptates sunt ea?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non quaerat dolorum tempora ducimus atque ratione laborum repudiandae aperiam quas tempore quia voluptate optio at, vel alias culpa, officiis id? Itaque recusandae repudiandae id saepe illum impedit dignissimos ducimus reprehenderit laborum ipsam asperiores, necessitatibus ratione sunt ex voluptate, minus, labore aut!
+  </p>
+</div>
+<style>
+  p {
+    color: black;
+  }
+</style>
+{% endblock %}

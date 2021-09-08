@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% comment %} {% load urlify %} {% endcomment %}
+{% block title %}View Details{% endblock %}
+{% block body %}
+<!-- {% comment %} <center><h1>Details of {{ object.get_full_name|urlify }}</h1> {% endcomment %} -->
+<div class="container mt-5">
+    <center>
+<ul>
+    <li>Employ ID: {{ object.employID }} </li>
+    <li>Name: {{ object.get_full_name }}</li>
+    <li>Personal Email: {{ object.personalEmail }}</li>
+    <li>Fladdra Email: {{ object.fladdraEmail }}</li>
+    <li>Mobile: {{ object.mobile }}</li>
+    <li>Position: {{ object.position }}</li>
+    <li>Github: {{ object.github }}</li>
+    <li>Education: {{ object.education }} </li>
+    <li>Address: {{ object.address }} </li>
+    <li>Joined On: {{ object.joinedOn }} </li>
+</ul>
+<br>
+<button class="btn btn-dark"><a href="{{ object.get_update_url }}">UPDATE</a></button>
+<button class="btn btn-dark"><a href="{{ object.get_delete_url }}">DELETE</a></button>
+<button class="btn btn-dark"><a href="/emp/list/">Back to List</a></button>
+</center>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block title %} Update
+Details {% endblock %} {% block body %}
+<div class="container mt-5">
+  <center><h1>Update Detail of {{ object.get_full_name }}</h1></center>
+  <div class="row">
+    <center>
+      <div class="col-md-6">
+        <form method="post" action="">
+          {% csrf_token %} {{ form|crispy }}
+          <p>Save Changes??</p>
+          <input class="btn btn-dark" type="submit" value="SAVE CHANGES" />
+          <button class="btn btn-dark">
+            <a href="/emp/list/">Back to List</a>
+          </button>
+        </form>
+      </div>
+    </center>
+  </div>
+</div>
+{% endblock %}

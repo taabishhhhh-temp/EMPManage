@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Employee List{% endblock %}
+{% block body %}
+<div class="container px-4">
+<center><h1>Employs List</h1></center>
+
+
+
+
+    {% if object_list %}
+    <div class="row gx-5">
+        <ul>
+            <div class="col">
+            {% for i in object_list %}
+                 <li>{{ i.employID }}  {{ i.get_full_name }} <button class="btn btn-dark"><a href=" {{ i.get_view_url }} ">VIEW</a></button> <button class="btn btn-dark"><a href="{{ i.get_update_url }}">UPDATE</a></button> <button class="btn btn-dark"><a href="{{ i.get_delete_url }}">DELETE</a></button> <button class="btn btn-dark"><a href=" {{ i.get_github_url }} " target="_blank">GITHUB</a></button></li>      
+            {% endfor %}
+        </div>
+        </ul>
+        {% else %}
+        <p>No Records</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+
