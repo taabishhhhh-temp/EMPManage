@@ -10,7 +10,6 @@ class EmployeeUnarchivedQuerysetView():
         return Employ.objects.unarchived()
 
     def get_object(self, *args, **kwargs):
-        print('get object running')
         id_ = self.kwargs.get('empid')
         return get_object_or_404(Employ, empid=id_)
 

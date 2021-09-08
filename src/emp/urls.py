@@ -29,3 +29,8 @@ urlpatterns = [
     # path('genericlistapi/<int:empid>/', GenericAPIView.as_view(), name="detail_with_generic"),
     # path('genericlistapi2/', EmployListAPI.as_view(), name="list_with_class2"),
 ]
+
+
+
+
+# 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
